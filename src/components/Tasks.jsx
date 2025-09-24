@@ -17,6 +17,30 @@ const Tasks = () => {
   const aftrnoonTasks = tasks.filter((task) => task.time == "Tarde")
   const eveningTasks = tasks.filter((task) => task.time == "Noite")
 
+  const handleTaskCheckboxClick = (taskId) => {
+    const newTasks = tasks.map((task) => {
+      if (task.id != taskId) {
+        return task
+      }
+
+      if (task.status === "not_started") {
+        return { ...task, status: "in_progress" }
+      }
+
+      if (task.status === "in_progress") {
+        return { ...task, status: "done" }
+      }
+
+      if (task.status === "done") {
+        return { ...task, status: "not_started" }
+      }
+
+      return task
+    })
+
+    setTasks(newTasks)
+  }
+
   return (
     <div className="w-full px-8 py-16">
       <div className="flex w-full justify-between">
@@ -48,7 +72,11 @@ const Tasks = () => {
 
           {/* Lista todas as tarefas */}
           {morningTasks.map((task) => (
-            <TaskIem key={task.id} task={task} />
+            <TaskIem
+              key={task.id}
+              task={task}
+              handleTaskCheckboxClick={handleTaskCheckboxClick}
+            />
           ))}
         </div>
 
@@ -58,7 +86,11 @@ const Tasks = () => {
 
           {/* Lista todas as tarefas */}
           {aftrnoonTasks.map((task) => (
-            <TaskIem key={task.id} task={task} />
+            <TaskIem
+              key={task.id}
+              task={task}
+              handleTaskCheckboxClick={handleTaskCheckboxClick}
+            />
           ))}
         </div>
 
@@ -68,7 +100,11 @@ const Tasks = () => {
 
           {/* Lista todas as tarefas */}
           {eveningTasks.map((task) => (
-            <TaskIem key={task.id} task={task} />
+            <TaskIem
+              key={task.id}
+              task={task}
+              handleTaskCheckboxClick={handleTaskCheckboxClick}
+            />
           ))}
         </div>
       </div>
