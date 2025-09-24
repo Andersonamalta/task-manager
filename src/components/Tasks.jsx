@@ -42,7 +42,7 @@ const Tasks = () => {
   }
 
   return (
-    <div className="w-full px-8 py-16">
+    <div className="w-full space-y-6 px-8 py-16">
       <div className="flex w-full justify-between">
         <div>
           <span className="text-xs font-semibold text-[#00ADB5]">
@@ -65,7 +65,7 @@ const Tasks = () => {
 
       {/* Lista de tarefas */}
 
-      <div className="mt-6 rounded-xl bg-white p-6">
+      <div className="rounded-xl bg-white p-6">
         {/* Manhã */}
         <div className="space-y-3">
           <TaskSeparator title="Manhã" icon={<SunIcon />} />
