@@ -13,9 +13,11 @@ import TaskSeparator from "./TasksSeparator"
 import Button from "./Button"
 import TASKS from "../constants/tasks"
 import TaskIem from "./TaskItem"
+import AddTaskDialog from "./AddTaskDialog"
 
 const Tasks = () => {
   const [tasks, setTasks] = useState(TASKS)
+  const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false)
 
   // Pega todas as tarefas com o time igual a morning e armazena nessa variavel
   const morningTasks = tasks.filter((task) => task.time == "Manhã")
@@ -70,10 +72,15 @@ const Tasks = () => {
             {" "}
             Limpar tarefas <TrashIcon />
           </Button>
-          <Button>
+          <Button
+            onclick={() => {
+              setAddTaskDialogIsOpen(true)
+            }}
+          >
             {" "}
             Nova tarefa <AddIcon />
           </Button>
+          <AddTaskDialog isOpen={addTaskDialogIsOpen} />
         </div>
       </div>
 
