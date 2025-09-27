@@ -5,6 +5,7 @@ import {
   DetailsIcon,
   TrashIcon,
 } from "../assets/icons"
+
 import Button from "./Button"
 
 const TaskIem = ({ task, handleCheckboxClick, handleDeleteClick }) => {
