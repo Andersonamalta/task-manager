@@ -6,6 +6,7 @@ import "./AddTaskDialog.css"
 import Input from "./input"
 import Button from "./Button"
 import { useRef } from "react"
+import InputLabel from "./InputLabel"
 
 const AddTaskDialog = ({ isOpen, handleClose }) => {
   const nodeRef = useRef()
@@ -38,7 +39,19 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
                   label="Título"
                   placeholder="Insira o título da tarefa"
                 />
-                <Input id="time" label="Horário" placeholder="Horário" />
+
+                <div className="flex flex-col gap-1 text-left">
+                  <InputLabel htmlfor="time">Horário</InputLabel>
+                  <select
+                    id="time"
+                    className="appearance-none rounded-lg border border-solid border-[#ECECEC] px-4 py-3 placeholder-[#9A9C9F] placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+                  >
+                    <option value="Manhã">Manhã</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noite">Noite</option>
+                  </select>
+                </div>
+
                 <Input
                   id="description"
                   label="Descrição"
