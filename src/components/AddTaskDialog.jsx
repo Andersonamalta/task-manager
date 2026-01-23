@@ -93,7 +93,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
               <p className="mt-1 mb-4 text-sm text-[#9A9C9F]">
                 insira as informações abaixo
               </p>
-              <div className="flex w-[336px] flex-col space-y-4">
+              <div className="flex w-84 flex-col space-y-4">
                 <Input
                   id="title"
                   label="Título"
