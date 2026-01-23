@@ -83,14 +83,14 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
         {createPortal(
           <div
             ref={nodeRef}
-            className="fixed bottom-0 left-0 top-0 flex h-screen w-screen items-center justify-center backdrop-blur"
+            className="fixed top-0 bottom-0 left-0 flex h-screen w-screen items-center justify-center backdrop-blur"
           >
             {/*Dialog*/}
             <div className="rounded-xl bg-white p-5 text-center shadow">
               <h2 className="text-xl font-semibold text-[#35383E]">
                 Nova Tarefa
               </h2>
-              <p className="mb-4 mt-1 text-sm text-[#9A9C9F]">
+              <p className="mt-1 mb-4 text-sm text-[#9A9C9F]">
                 insira as informações abaixo
               </p>
               <div className="flex w-[336px] flex-col space-y-4">
@@ -120,7 +120,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
 
                 <div className="flex gap-3">
                   <Button
-                    variant="secundary"
+                    color="secundary"
                     size="large"
                     className="w-full"
                     onclick={handleClose}

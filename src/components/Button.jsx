@@ -1,12 +1,32 @@
+import { tv } from "tailwind-variants"
 const Button = ({
   children,
-  variant = "primary",
+  color = "primary",
   size = "small",
   onclick,
   className,
   ...rest
 }) => {
-  const getVariantClass = () => {
+  const button = tv({
+    base: "flex items-center justify-center gap-1 rounded-md px-3 font-semibold transition hover:opacity-75",
+    variants: {
+      color: {
+        primary: "bg-[#00ADB5] text-white",
+        ghost: "bg-transparent text-[#818181]",
+        secundary: "bg-[#EEEEEE] text-[#35383E]",
+      },
+      size: {
+        small: "py-1 text-xs",
+        large: "py-2 text-sm",
+      },
+    },
+    defaultVariants: {
+      color: "primary",
+      size: "small",
+    },
+  })
+
+  /*const getVariantClass = () => {
     if (variant === "primary") {
       return "bg-[#00ADB5] text-white"
     }
@@ -17,9 +37,9 @@ const Button = ({
     if (variant === "secundary") {
       return "bg-[#EEEEEE] text-[#35383E]"
     }
-  }
+  }*/
 
-  const getSizeClass = () => {
+  /*const getSizeClass = () => {
     if (size === "small") {
       return "py-1 text-xs"
     }
@@ -27,10 +47,11 @@ const Button = ({
     if (size === "large") {
       return "py-2 text-sm"
     }
-  }
+  }*/
+
   return (
     <button
-      className={`flex items-center justify-center gap-1 rounded-md px-3 font-semibold transition hover:opacity-65 ${getVariantClass()} ${getSizeClass()} ${className}`}
+      className={button({ color, size, className })}
       {...rest}
       onClick={onclick}
     >
