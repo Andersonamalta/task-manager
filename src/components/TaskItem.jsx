@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import {
   CheckIcon,
   LoaderIcon,
@@ -63,6 +64,18 @@ const TaskIem = ({ task, handleCheckboxClick, handleDeleteClick }) => {
       </div>
     </div>
   )
+}
+
+TaskIem.prototype = {
+  task: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    time: PropTypes.oneOf(["Manhã", "Tarde", "Noite"]).isRequired,
+    status: PropTypes.oneOf(["done", "in_progress", "not_started"]).isRequired,
+  }).isRequired,
+  handleCheckboxClick: PropTypes.func.isRequired,
+  handleDeleteClick: PropTypes.func.isRequired,
 }
 
 export default TaskIem
