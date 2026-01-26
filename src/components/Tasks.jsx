@@ -1,5 +1,5 @@
 import { toast } from "sonner"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import {
   TrashIcon,
@@ -16,8 +16,24 @@ import TaskIem from "./TaskItem"
 import AddTaskDialog from "./AddTaskDialog"
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState(TASKS)
+  const [tasks, setTasks] = useState([])
   const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false)
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      // Preciso pegar os dados da API
+      const response = await fetch("http://localhost:3000/tasks", {
+        method: "GET",
+      })
+
+      const tasks = await response.json()
+
+      // Após pegar os dados da API, atualizar o meu state "tasks"
+      setTasks(tasks)
+    }
+
+    fetchTasks()
+  }, [])
 
   // Pega todas as tarefas com o time igual a morning e armazena nessa variavel
   const morningTasks = tasks.filter((task) => task.time == "Manhã")
