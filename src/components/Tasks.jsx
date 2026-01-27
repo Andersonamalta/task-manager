@@ -11,7 +11,6 @@ import {
 
 import TaskSeparator from "./TasksSeparator"
 import Button from "./Button"
-import TASKS from "../constants/tasks"
 import TaskIem from "./TaskItem"
 import AddTaskDialog from "./AddTaskDialog"
 
@@ -67,7 +66,17 @@ const Tasks = () => {
     setTasks(newTasks)
   }
 
-  const handleAddTaskSubmit = (task) => {
+  const handleAddTaskSubmit = async (task) => {
+    // Chamar a API para adicionar a tarefa
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
+    })
+    if (!response.ok) {
+      return toast.error(
+        "Erro ao adicionar a tarefa. Por favor, tente novamente."
+      )
+    }
     setTasks([...tasks, task])
     toast.success("Tarefa adicionada com sucesso!!")
   }

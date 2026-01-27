@@ -68,7 +68,7 @@ const TaskIem = ({ task, handleCheckboxClick, handleDeleteClick }) => {
 
 TaskIem.prototype = {
   task: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     time: PropTypes.oneOf(["Manhã", "Tarde", "Noite"]).isRequired,
