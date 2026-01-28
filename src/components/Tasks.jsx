@@ -18,6 +18,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([])
   const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false)
 
+  // Buscar as tarefas no Banco de dados
   useEffect(() => {
     const fetchTasks = async () => {
       // Preciso pegar os dados da API
@@ -66,6 +67,7 @@ const Tasks = () => {
     setTasks(newTasks)
   }
 
+  // Adicionar uma tarefa nova ao banco de dados
   const handleAddTaskSubmit = async (task) => {
     // Chamar a API para adicionar a tarefa
     const response = await fetch("http://localhost:3000/tasks", {
@@ -81,7 +83,18 @@ const Tasks = () => {
     toast.success("Tarefa adicionada com sucesso!!")
   }
 
-  const handleTaskDeleteClick = (taskId) => {
+  // Deletar uma tarefa do banco de dados
+  const handleTaskDeleteClick = async (taskId) => {
+    // Chamar a API para deletar a tarefa
+    const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+      method: "DELETE",
+    })
+    if (!response.ok) {
+      return toast.error(
+        "Erro ao deletar a tarefa. Por favor, tente novamente."
+      )
+    }
+    // Após chamar API, atualizar o state
     const newTasks = tasks.filter((task) => task.id != taskId)
     setTasks(newTasks)
     toast.success("Tarefa deletada com sucesso!")
