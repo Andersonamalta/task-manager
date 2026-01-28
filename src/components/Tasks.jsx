@@ -75,26 +75,18 @@ const Tasks = () => {
       body: JSON.stringify(task),
     })
     if (!response.ok) {
+      setDeleteTaskIsLoading(false)
       return toast.error(
         "Erro ao adicionar a tarefa. Por favor, tente novamente."
       )
     }
     setTasks([...tasks, task])
     toast.success("Tarefa adicionada com sucesso!!")
+    setDeleteTaskIsLoading(false)
   }
 
   // Deletar uma tarefa do banco de dados
-  const handleTaskDeleteClick = async (taskId) => {
-    // Chamar a API para deletar a tarefa
-    const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-      method: "DELETE",
-    })
-    if (!response.ok) {
-      return toast.error(
-        "Erro ao deletar a tarefa. Por favor, tente novamente."
-      )
-    }
-    // Após chamar API, atualizar o state
+  const onTaskDeleteSuccess = async (taskId) => {
     const newTasks = tasks.filter((task) => task.id != taskId)
     setTasks(newTasks)
     toast.success("Tarefa deletada com sucesso!")
@@ -144,7 +136,7 @@ const Tasks = () => {
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSuccess={onTaskDeleteSuccess}
             />
           ))}
         </div>
@@ -159,7 +151,7 @@ const Tasks = () => {
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSuccess={onTaskDeleteSuccess}
             />
           ))}
         </div>
@@ -174,7 +166,7 @@ const Tasks = () => {
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSuccess={onTaskDeleteSuccess}
             />
           ))}
         </div>

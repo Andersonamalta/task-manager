@@ -2,14 +2,34 @@ import PropTypes from "prop-types"
 import {
   CheckIcon,
   LoaderIcon,
+  LoaderIconTrash,
   NotStartedIcon,
   DetailsIcon,
   TrashIcon,
 } from "../assets/icons"
 
 import Button from "./Button"
+import { useState } from "react"
+import { toast } from "sonner"
 
-const TaskIem = ({ task, handleCheckboxClick, handleDeleteClick }) => {
+const TaskIem = ({ task, handleCheckboxClick, onDeleteSuccess }) => {
+  const [deleteIsLoading, setDeleteIsLoading] = useState(false)
+
+  const handleDeleteClick = async () => {
+    setDeleteIsLoading(true)
+    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+      method: "DELETE",
+    })
+    if (!response.ok) {
+      setDeleteIsLoading(false)
+      return toast.error(
+        "Erro ao deletar a tarefa. Por favor, tente novamente."
+      )
+    }
+    onDeleteSuccess(task.id)
+    setDeleteIsLoading(false)
+  }
+
   const getStatusClass = () => {
     if (task.status == "done") {
       return "bg-[#00ADB5]/10 text-[#00ADB5]"
@@ -41,7 +61,9 @@ const TaskIem = ({ task, handleCheckboxClick, handleDeleteClick }) => {
             }}
           />
           {task.status === "done" && <CheckIcon />}
-          {task.status === "in_progress" && <LoaderIcon />}
+          {task.status === "in_progress" && (
+            <LoaderIcon className="animate-spin" />
+          )}
           {task.status === "not_started" && <NotStartedIcon />}
         </label>
 
@@ -51,11 +73,14 @@ const TaskIem = ({ task, handleCheckboxClick, handleDeleteClick }) => {
       <div className="flex items-center gap-2">
         <Button
           color="ghost"
-          onclick={() => {
-            handleDeleteClick(task.id)
-          }}
+          onclick={handleDeleteClick}
+          disabled={deleteIsLoading}
         >
-          <TrashIcon className="text-[#9A9C9F]" />
+          {deleteIsLoading ? (
+            <LoaderIconTrash className="text-brand-text-gray animate-spin" />
+          ) : (
+            <TrashIcon className="text-[#9A9C9F]" />
+          )}
         </Button>
 
         <a href="#" className="transition hover:opacity-75">

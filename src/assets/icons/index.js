@@ -7,6 +7,7 @@ import HomeIcon from "./home.svg?react"
 import TaskIcon from "./tasks.svg?react"
 import CheckIcon from "./check.svg?react"
 import LoaderIcon from "./loader.svg?react"
+import LoaderIconTrash from "./loaderTrash.svg?react"
 import NotStartedIcon from "./not_started.svg?react"
 import DetailsIcon from "./details.svg?react"
 
@@ -20,6 +21,7 @@ export {
   TaskIcon,
   CheckIcon,
   LoaderIcon,
+  LoaderIconTrash,
   NotStartedIcon,
   DetailsIcon,
 }
