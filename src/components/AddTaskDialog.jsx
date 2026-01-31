@@ -6,7 +6,7 @@ import PropTypes from "prop-types"
 
 import "./AddTaskDialog.css"
 
-import Input from "./input"
+import Input from "./Input"
 import Button from "./Button"
 import TimeSelect from "./TimeSelect"
 import { toast } from "sonner"

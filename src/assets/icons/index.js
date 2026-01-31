@@ -10,6 +10,8 @@ import LoaderIcon from "./loader.svg?react"
 import LoaderIconTrash from "./loaderTrash.svg?react"
 import NotStartedIcon from "./not_started.svg?react"
 import DetailsIcon from "./details.svg?react"
+import ChevronRightIcon from "./chevron-right.svg?react"
+import ArrowLeftIcon from "./arrow-left.svg?react"
 
 export {
   TrashIcon,
@@ -24,4 +26,6 @@ export {
   LoaderIconTrash,
   NotStartedIcon,
   DetailsIcon,
+  ChevronRightIcon,
+  ArrowLeftIcon,
 }

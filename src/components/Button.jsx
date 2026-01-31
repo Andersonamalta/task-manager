@@ -16,6 +16,7 @@ const Button = ({
         primary: "bg-[#00ADB5] text-white",
         ghost: "bg-transparent text-[#818181]",
         secundary: "bg-[#EEEEEE] text-[#35383E]",
+        danger: "bg-[#EF4444] text-white",
       },
       size: {
         small: "py-1 text-xs",
@@ -42,7 +43,7 @@ const Button = ({
 
 Button.PropTypes = {
   children: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(["primary", "ghost", "secundary"]),
+  color: PropTypes.oneOf(["primary", "ghost", "secundary", "danger"]),
   size: PropTypes.oneOf(["small", "large"]),
   className: PropTypes.string,
 }
