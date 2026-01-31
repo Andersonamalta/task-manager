@@ -106,12 +106,14 @@ const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
                   value={title}
                   onChange={(event) => setTitle(event.target.value)}
                   error={titleError}
+                  disabled={isLoading}
                 />
 
                 <TimeSelect
                   value={time}
                   onChange={(event) => setTime(event.target.value)}
                   error={timeError}
+                  disabled={isLoading}
                 />
 
                 <Input
@@ -121,6 +123,7 @@ const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
                   error={descriptionError}
+                  disabled={isLoading}
                 />
 
                 <div className="flex gap-3">
