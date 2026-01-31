@@ -62,7 +62,7 @@ const TaskIem = ({ task, handleCheckboxClick, onDeleteSuccess }) => {
           />
           {task.status === "done" && <CheckIcon />}
           {task.status === "in_progress" && (
-            <LoaderIcon className="animate-spin" />
+            <LoaderIconTrash className="animate-spin" />
           )}
           {task.status === "not_started" && <NotStartedIcon />}
         </label>

@@ -9,14 +9,16 @@ import "./AddTaskDialog.css"
 import Input from "./input"
 import Button from "./Button"
 import TimeSelect from "./TimeSelect"
+import { toast } from "sonner"
+import { LoaderIcon } from "../assets/icons"
 
-const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
+const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
   const nodeRef = useRef()
-
   const [title, setTitle] = useState()
   const [time, setTime] = useState()
   const [description, setDescription] = useState()
   const [errors, setErrors] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (!isOpen) {
@@ -26,43 +28,46 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
     }
   }, [isOpen])
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
+    setIsLoading(true)
     const newErrors = []
-
     if (!title.trim()) {
       newErrors.push({
         inputName: "title",
         message: "O título é obrigatório.",
       })
     }
-
     if (!time.trim()) {
       newErrors.push({
         inputName: "time",
         message: "O horário é obrigatório.",
       })
     }
-
     if (!description.trim()) {
       newErrors.push({
         inputName: "description",
         message: "A descrição é obrigatória.",
       })
     }
-
     setErrors(newErrors)
-
     if (newErrors.length > 0) {
-      return
+      return setIsLoading(true)
     }
 
-    handleSubmit({
-      id: v4(),
-      title,
-      time,
-      description,
-      status: "not_started",
+    const task = { time, title, description, id: v4(), status: "not_started" }
+    // Chamar a API para adicionar a tarefa
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
     })
+    if (!response.ok) {
+      setIsLoading(false)
+      return toast.error(
+        "Erro ao adicionar a tarefa. Por favor, tente novamente."
+      )
+    }
+    onSubmitSuccess(task)
+    setIsLoading(false)
     handleClose()
   }
 
@@ -71,7 +76,6 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
   const descriptionError = errors.find(
     (error) => error.inputName === "description"
   )
-
   return (
     <CSSTransition
       nodeRef={nodeRef}
@@ -132,7 +136,9 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                     size="large"
                     className="w-full"
                     onclick={handleSaveClick}
+                    disabled={isLoading}
                   >
+                    {isLoading && <LoaderIcon className="animate-spin" />}
                     Salvar
                   </Button>
                 </div>
