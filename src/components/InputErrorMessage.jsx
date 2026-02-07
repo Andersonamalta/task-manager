@@ -5,7 +5,7 @@ const InputErrorMessage = ({ children }) => {
 }
 
 InputErrorMessage.prototype = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.string.isRequired,
 }
 
 export default InputErrorMessage

@@ -2,8 +2,8 @@
   "tasks": [
     {
       "id": "1",
-      "title": "Estudar React",
-      "description": "Estudar sobre States no react",
+      "title": "Estudar",
+      "description": "Estudar sobre os paradigmas do React",
       "time": "Manhã",
       "status": "done"
     },
