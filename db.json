@@ -1,25 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "1",
-      "title": "Estudar",
-      "description": "Estudar sobre os paradigmas do React",
-      "time": "Manhã",
-      "status": "done"
-    },
-    {
-      "id": "2",
-      "title": "Ler artigo",
-      "description": "Ler artigo sobre boas práticas no react",
-      "time": "Manhã",
-      "status": "done"
-    },
-    {
-      "id": "3",
-      "title": "Treinar",
-      "description": "Ir a academia",
-      "time": "Tarde",
-      "status": "in_progress"
-    }
-  ]
+  "tasks": []
 }

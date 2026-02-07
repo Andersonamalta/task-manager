@@ -46,9 +46,6 @@ const TaskDetailsPage = () => {
     const title = titleRef.current.value
     const description = descriptionRef.current.value
     const time = timeRef.current.value
-    console.log("Title Error:", titleError)
-    console.log("Time Error:", timeError)
-    console.log("Description Error:", descriptionError)
 
     if (!title.trim()) {
       newErrors.push({
