@@ -1,3 +1,11 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "366c35f7-71ce-4552-9ed2-104609b7db44",
+      "time": "Tarde",
+      "title": "Compras do mês",
+      "description": "Fazer compras no mercado",
+      "status": "not_started"
+    }
+  ]
 }

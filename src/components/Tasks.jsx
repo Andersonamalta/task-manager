@@ -110,7 +110,7 @@ const Tasks = () => {
           <TaskSeparator title="Manhã" icon={<SunIcon />} />
           {morningTasks.length === 0 && (
             <p className="text-sm text-gray-500">
-              Nenhuma tarefa para este período da manhã
+              Nenhuma tarefa cadastrada para o período da manhã.
             </p>
           )}
           {/* Lista todas as tarefas */}
@@ -129,7 +129,7 @@ const Tasks = () => {
           <TaskSeparator title="Tarde" icon={<CloudSunIcon />} />
           {aftrnoonTasks.length === 0 && (
             <p className="text-sm text-gray-500">
-              Nenhuma tarefa para este período da tarde
+              Nenhuma tarefa cadastrada para o período da tarde.
             </p>
           )}
           {/* Lista todas as tarefas */}
@@ -148,7 +148,7 @@ const Tasks = () => {
           <TaskSeparator title="Noite" icon={<MoonIcon />} />
           {eveningTasks.length === 0 && (
             <p className="text-sm text-gray-500">
-              Nenhuma tarefa para este período da noite
+              Nenhuma tarefa cadastrada para o período da noite.
             </p>
           )}
           {/* Lista todas as tarefas */}
