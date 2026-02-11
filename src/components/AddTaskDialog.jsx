@@ -11,71 +11,43 @@ import Button from "./Button"
 import TimeSelect from "./TimeSelect"
 import { toast } from "sonner"
 import { LoaderIcon } from "../assets/icons"
+import { useForm } from "react-hook-form"
 
 const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
   const nodeRef = useRef()
-  const [title, setTitle] = useState()
-  const [time, setTime] = useState()
-  const [description, setDescription] = useState()
-  const [errors, setErrors] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    reset,
+  } = useForm()
 
-  useEffect(() => {
-    if (!isOpen) {
-      setTitle("")
-      setTime("Manhã")
-      setDescription("")
+  const handleSaveClick = async (data) => {
+    const task = {
+      time: data.time,
+      title: data.title.trim(),
+      description: data.description.trim(),
+      id: v4(),
+      status: "not_started",
     }
-  }, [isOpen])
-
-  const handleSaveClick = async () => {
-    setIsLoading(true)
-    const newErrors = []
-    if (!title.trim()) {
-      newErrors.push({
-        inputName: "title",
-        message: "O título é obrigatório.",
-      })
-    }
-    if (!time.trim()) {
-      newErrors.push({
-        inputName: "time",
-        message: "O horário é obrigatório.",
-      })
-    }
-    if (!description.trim()) {
-      newErrors.push({
-        inputName: "description",
-        message: "A descrição é obrigatória.",
-      })
-    }
-    setErrors(newErrors)
-    if (newErrors.length > 0) {
-      return setIsLoading(true)
-    }
-
-    const task = { time, title, description, id: v4(), status: "not_started" }
     // Chamar a API para adicionar a tarefa
     const response = await fetch("http://localhost:3000/tasks", {
       method: "POST",
       body: JSON.stringify(task),
     })
     if (!response.ok) {
-      setIsLoading(false)
       return toast.error(
         "Erro ao adicionar a tarefa. Por favor, tente novamente."
       )
     }
     onSubmitSuccess(task)
-    setIsLoading(false)
     handleClose()
+    reset({
+      title: "",
+      time: "Manhã",
+      description: "",
+    })
   }
-
-  const titleError = errors.find((error) => error.inputName === "title")
-  const timeError = errors.find((error) => error.inputName === "time")
-  const descriptionError = errors.find(
-    (error) => error.inputName === "description"
-  )
   return (
     <CSSTransition
       nodeRef={nodeRef}
@@ -98,32 +70,50 @@ const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
               <p className="mt-1 mb-4 text-sm text-[#9A9C9F]">
                 insira as informações abaixo
               </p>
-              <div className="flex w-84 flex-col space-y-4">
+              <form
+                onSubmit={handleSubmit(handleSaveClick)}
+                className="flex w-84 flex-col space-y-4"
+              >
                 <Input
                   id="title"
                   label="Título"
                   placeholder="Insira o título da tarefa"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-                  error={titleError}
-                  disabled={isLoading}
+                  error={errors?.title?.message}
+                  disabled={isSubmitting}
+                  {...register("title", {
+                    required: "O título é obrigatório.",
+                    validate: (value) => {
+                      if (!value.trim()) {
+                        return "O título não pode ser vazio."
+                      }
+                      return true
+                    },
+                  })}
                 />
 
                 <TimeSelect
-                  value={time}
-                  onChange={(event) => setTime(event.target.value)}
-                  error={timeError}
-                  disabled={isLoading}
+                  error={errors?.time?.message}
+                  disabled={isSubmitting}
+                  {...register("time", {
+                    required: true,
+                  })}
                 />
 
                 <Input
                   id="description"
                   label="Descrição"
                   placeholder="Descreva a tarefa"
-                  value={description}
-                  onChange={(event) => setDescription(event.target.value)}
-                  error={descriptionError}
-                  disabled={isLoading}
+                  error={errors?.description?.message}
+                  disabled={isSubmitting}
+                  {...register("description", {
+                    required: "A descrição é obrigatória.",
+                    validate: (value) => {
+                      if (!value.trim()) {
+                        return "A descrição não pode ser vazia."
+                      }
+                      return true
+                    },
+                  })}
                 />
 
                 <div className="flex gap-3">
@@ -132,20 +122,21 @@ const AddTaskDialog = ({ isOpen, handleClose, onSubmitSuccess }) => {
                     size="large"
                     className="w-full"
                     onclick={handleClose}
+                    type="button"
                   >
                     Cancelar
                   </Button>
                   <Button
                     size="large"
                     className="w-full"
-                    onclick={handleSaveClick}
-                    disabled={isLoading}
+                    type="submit"
+                    disabled={isSubmitting}
                   >
-                    {isLoading && <LoaderIcon className="animate-spin" />}
+                    {isSubmitting && <LoaderIcon className="animate-spin" />}
                     Salvar
                   </Button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>,
           document.body

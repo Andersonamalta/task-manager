@@ -12,7 +12,7 @@ const Input = forwardRef(({ label, error, ...rest }, ref) => {
         {...rest}
         className="rounded-lg border border-solid border-[#ECECEC] px-4 py-3 placeholder-[#9A9C9F] placeholder:text-sm focus:ring-2 focus:ring-[#00ADB5] focus:outline-none"
       />
-      {error && <InputErrorMessage>{error.message}</InputErrorMessage>}
+      {error && <InputErrorMessage>{error}</InputErrorMessage>}
     </div>
   )
 })

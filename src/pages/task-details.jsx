@@ -50,7 +50,7 @@ const TaskDetailsPage = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title: data.trim(),
+        title: data.title.trim(),
         description: data.description.trim(),
         time: data.time,
       }),
@@ -123,7 +123,7 @@ const TaskDetailsPage = () => {
                     return true
                   },
                 })}
-                errorMessage={errors?.title?.message}
+                error={errors?.title?.message}
               />
             </div>
             <div>
@@ -131,7 +131,7 @@ const TaskDetailsPage = () => {
                 {...register("time", {
                   required: "O horário é obrigatório",
                 })}
-                errorMessage={errors?.time?.message}
+                error={errors?.time?.message}
               />
             </div>
             <div>
@@ -147,7 +147,7 @@ const TaskDetailsPage = () => {
                     return true
                   },
                 })}
-                errorMessage={errors?.description?.message}
+                error={errors?.description?.message}
               />
             </div>
           </div>
