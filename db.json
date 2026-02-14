@@ -1,20 +1,6 @@
 {
   "tasks": [
     {
-      "id": "366c35f7-71ce-4552-9ed2-104609b7db44",
-      "time": "Tarde",
-      "title": "Compras",
-      "description": "Compras do mês de Março",
-      "status": "not_started"
-    },
-    {
-      "id": "aa50dae0-104c-4370-b226-eab450d66578",
-      "time": "Tarde",
-      "title": "Teste",
-      "description": "Teste 1",
-      "status": "not_started"
-    },
-    {
       "id": "d88660b7-ed30-4417-9990-e1d50be00b58",
       "status": "not_started"
     }

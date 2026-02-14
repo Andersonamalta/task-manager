@@ -5,6 +5,9 @@ import "./index.css"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import TaskDetailsPage from "./pages/task-details.jsx"
 import { Toaster } from "sonner"
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -19,7 +22,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Toaster toastOptions={{ style: { color: "#3E383E" } }} />
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <Toaster toastOptions={{ style: { color: "#3E383E" } }} />
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 )
