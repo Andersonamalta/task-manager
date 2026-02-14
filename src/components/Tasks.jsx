@@ -57,21 +57,6 @@ const Tasks = () => {
     queryClient.setQueryData("tasks", newTasks)
   }
 
-  // Adicionar uma tarefa nova ao banco de dados
-  const onTaskSubmitSuccess = async (task) => {
-    queryClient.setQueryData("tasks", (currentTasks) => [...currentTasks, task])
-    toast.success("Tarefa adicionada com sucesso!!")
-    setDeleteTaskIsLoading(false)
-  }
-
-  // Deletar uma tarefa do banco de dados
-  const onTaskDeleteSuccess = async (taskId) => {
-    queryClient.setQueryData("tasks", (currentTasks) =>
-      currentTasks.filter((task) => task.id != taskId)
-    )
-    toast.success("Tarefa deletada com sucesso!")
-  }
-
   return (
     <div className="w-full space-y-6 px-8 py-16">
       <div className="flex w-full justify-between">
@@ -98,7 +83,6 @@ const Tasks = () => {
           <AddTaskDialog
             handleClose={() => setAddTaskDialogIsOpen(false)}
             isOpen={addTaskDialogIsOpen}
-            onSubmitSuccess={onTaskSubmitSuccess}
           />
         </div>
       </div>
@@ -118,7 +102,6 @@ const Tasks = () => {
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              onDeleteSuccess={onTaskDeleteSuccess}
             />
           ))}
         </div>
@@ -137,7 +120,6 @@ const Tasks = () => {
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              onDeleteSuccess={onTaskDeleteSuccess}
             />
           ))}
         </div>
@@ -156,7 +138,6 @@ const Tasks = () => {
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              onDeleteSuccess={onTaskDeleteSuccess}
             />
           ))}
         </div>
