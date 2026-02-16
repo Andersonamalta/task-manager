@@ -35,7 +35,7 @@ const TaskDetailsPage = () => {
 
   const { data: task } = useGetTask({
     taskId,
-    onSuccess: (task) => reset(task),
+    onSuccess: reset,
   })
 
   const handleBackClick = () => {
