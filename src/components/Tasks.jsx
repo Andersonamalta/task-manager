@@ -13,20 +13,12 @@ import TaskSeparator from "./TasksSeparator"
 import Button from "./Button"
 import TaskIem from "./TaskItem"
 import AddTaskDialog from "./AddTaskDialog"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useQueryClient } from "@tanstack/react-query"
+import { useGetTasks } from "../hooks/data/use-get-tasks"
 
 const Tasks = () => {
   const queryClient = useQueryClient()
-  const { data: tasks } = useQuery({
-    queryKey: "tasks",
-    queryFn: async () => {
-      const response = await fetch("http://localhost:3000/tasks", {
-        method: "GET",
-      })
-      const tasks = await response.json()
-      return tasks
-    },
-  })
+  const { data: tasks } = useGetTasks()
 
   const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false)
 

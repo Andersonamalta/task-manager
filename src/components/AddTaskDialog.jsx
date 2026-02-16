@@ -12,25 +12,10 @@ import TimeSelect from "./TimeSelect"
 import { toast } from "sonner"
 import { LoaderIcon } from "../assets/icons"
 import { useForm } from "react-hook-form"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useAddTasks } from "../hooks/data/use-add-tasks"
 
 const AddTaskDialog = ({ isOpen, handleClose }) => {
-  const queryClient = useQueryClient()
-  const { mutate } = useMutation({
-    mutationKey: "addTask",
-    mutationFn: async (task) => {
-      const response = await fetch("http://localhost:3000/tasks", {
-        method: "POST",
-        body: JSON.stringify(task),
-      })
-      if (!response.ok) {
-        throw new Error(
-          "Erro ao adicionar a tarefa. Por favor, tente novamente."
-        )
-      }
-      return response.json()
-    },
-  })
+  const { mutate: addTask } = useAddTasks()
   const nodeRef = useRef()
   const {
     register,
@@ -47,12 +32,8 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
       id: v4(),
       status: "not_started",
     }
-    mutate(task, {
+    addTask(task, {
       onSuccess: () => {
-        queryClient.setQueryData("tasks", (currentTasks) => [
-          ...currentTasks,
-          task,
-        ])
         handleClose()
         reset({
           title: "",
