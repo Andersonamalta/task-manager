@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client"
 import App from "./App.jsx"
 import "./index.css"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import TaskDetailsPage from "./pages/task-details.jsx"
+import TaskDetailsPage from "./pages/TaskDetails.jsx"
 import { Toaster } from "sonner"
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 
