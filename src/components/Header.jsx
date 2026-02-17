@@ -14,10 +14,6 @@ function Header({ subtitle, title }) {
       </div>
 
       <div className="flex items-center gap-2.5">
-        <Button color="ghost">
-          {" "}
-          Limpar tarefas <TrashIcon />
-        </Button>
         <Button
           onclick={() => {
             setAddTaskDialogIsOpen(true)
