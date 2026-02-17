@@ -11,9 +11,36 @@ import Button from "./Button"
 import { toast } from "sonner"
 import { Link } from "react-router-dom"
 import { useDeleteTasks } from "../hooks/data/use-delete-tasks"
+import { useUpdateTask } from "../hooks/data/use-update-tasks"
 
-const TaskIem = ({ task, handleCheckboxClick }) => {
+const TaskIem = ({ task }) => {
   const { mutate: deleteTask, isPending } = useDeleteTasks(task.id)
+
+  const { mutate: updateTask } = useUpdateTask(task.id)
+
+  const getNewStatus = () => {
+    if (task.status === "not_started") {
+      return "in_progress"
+    }
+    if (task.status === "in_progress") {
+      return "done"
+    }
+    return "not_started"
+  }
+
+  const handleCheckboxClick = () => {
+    updateTask(
+      { status: getNewStatus() },
+      {
+        onSuccess: () => {
+          toast.success("Tarefa atualizada com sucesso!")
+        },
+        onError: () => {
+          toast.error("Ocorreu um erro ao atualizar a tarefa.")
+        },
+      }
+    )
+  }
 
   const handleDeleteClick = async () => {
     deleteTask(undefined, {
@@ -52,9 +79,7 @@ const TaskIem = ({ task, handleCheckboxClick }) => {
             type="checkbox"
             checked={task.status == "done"}
             className="absolute h-full w-full cursor-pointer opacity-0"
-            onChange={() => {
-              handleCheckboxClick(task.id)
-            }}
+            onChange={handleCheckboxClick}
           />
           {task.status === "done" && <CheckIcon />}
           {task.status === "in_progress" && (

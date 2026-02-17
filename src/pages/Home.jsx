@@ -14,9 +14,7 @@ const HomePage = () => {
   const inProgressTasks = tasks?.filter(
     (task) => task.status === "in_progress"
   ).length
-  const completedTask = tasks?.filter(
-    (task) => task.status === "completed"
-  ).length
+  const completedTask = tasks?.filter((task) => task.status === "done").length
 
   return (
     <div className="flex">
