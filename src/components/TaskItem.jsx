@@ -1,11 +1,11 @@
 import PropTypes from "prop-types"
 import {
+  CheckIcon,
   LoaderIconTrash,
   NotStartedIcon,
   DetailsIcon,
   TrashIcon,
 } from "../assets/icons"
-import CheckIcon from "./check.svg?react"
 
 import Button from "./Button"
 import { toast } from "sonner"
