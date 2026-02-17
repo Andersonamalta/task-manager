@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import {
-  CheckIcon,
+  CheckTaskIcon,
   LoaderIconTrash,
   NotStartedIcon,
   DetailsIcon,
@@ -81,7 +81,7 @@ const TaskIem = ({ task }) => {
             className="absolute h-full w-full cursor-pointer opacity-0"
             onChange={handleCheckboxClick}
           />
-          {task.status === "done" && <CheckIcon />}
+          {task.status === "done" && <CheckTaskIcon />}
           {task.status === "in_progress" && (
             <LoaderIconTrash className="animate-spin" />
           )}

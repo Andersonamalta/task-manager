@@ -5,7 +5,7 @@ import CloudSunIcon from "./cloud-sun.svg?react"
 import MoonIcon from "./moon.svg?react"
 import HomeIcon from "./home.svg?react"
 import TaskIcon from "./tasks.svg?react"
-import CheckIcon from "./check.svg?react"
+import CheckTaskIcon from "./check.svg?react"
 import LoaderIcon from "./loader.svg?react"
 import LoaderIconTrash from "./loaderTrash.svg?react"
 import NotStartedIcon from "./not_started.svg?react"
@@ -23,7 +23,7 @@ export {
   MoonIcon,
   HomeIcon,
   TaskIcon,
-  CheckIcon,
+  CheckTaskIcon,
   LoaderIcon,
   LoaderIconTrash,
   NotStartedIcon,
