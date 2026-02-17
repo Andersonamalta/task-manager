@@ -19,12 +19,12 @@ const DashboardCards = () => {
         secondaryText="Tarefas Totais"
       />
       <DashboardCard
-        icon={<LoaderIcon />}
+        icon={<LoaderIcon className="animate-spin" />}
         mainText={notStartedTasks}
         secondaryText="Tarefas não iniciadas"
       />
       <DashboardCard
-        icon={<LoaderIcon />}
+        icon={<LoaderIcon className="animate-spin" />}
         mainText={inProgressTasks}
         secondaryText="Tarefas em andamento"
       />

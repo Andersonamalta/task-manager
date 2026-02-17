@@ -1,18 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "a3848494-a3f0-49ec-a89e-45908f7a3390",
-      "time": "Tarde",
-      "title": "Teste",
-      "description": "Teste",
-      "status": "done"
-    },
-    {
-      "id": "e7522a81-34e6-4223-a55c-f4380b7f5ed4",
-      "time": "Manhã",
-      "title": "Teste 2",
-      "description": "Teste 2",
-      "status": "done"
-    }
-  ]
+  "tasks": []
 }
