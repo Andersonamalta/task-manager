@@ -1,26 +1,18 @@
 import { toast } from "sonner"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-import {
-  TrashIcon,
-  AddIcon,
-  SunIcon,
-  CloudSunIcon,
-  MoonIcon,
-} from "../assets/icons"
+import { SunIcon, CloudSunIcon, MoonIcon } from "../assets/icons"
 
 import TaskSeparator from "./TasksSeparator"
-import Button from "./Button"
 import TaskIem from "./TaskItem"
-import AddTaskDialog from "./AddTaskDialog"
 import { useQueryClient } from "@tanstack/react-query"
 import { useGetTasks } from "../hooks/data/use-get-tasks"
+import Header from "./Header"
+import { tasksQueryKeys } from "../keys/queries"
 
 const Tasks = () => {
   const queryClient = useQueryClient()
   const { data: tasks } = useGetTasks()
-
-  const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false)
 
   // Pega todas as tarefas com o time igual a morning e armazena nessa variavel
   const morningTasks = tasks?.filter((task) => task.time == "Manhã")
@@ -46,38 +38,12 @@ const Tasks = () => {
       }
       return task
     })
-    queryClient.setQueryData("tasks", newTasks)
+    queryClient.setQueryData(tasksQueryKeys.getAll(), newTasks)
   }
 
   return (
     <div className="w-full space-y-6 px-8 py-16">
-      <div className="flex w-full justify-between">
-        <div>
-          <span className="text-xs font-semibold text-[#00ADB5]">
-            Minhas Tarefas
-          </span>
-          <h2 className="text-xl font-semibold">Minhas Tarefas</h2>
-        </div>
-
-        <div className="flex items-center gap-2.5">
-          <Button color="ghost">
-            {" "}
-            Limpar tarefas <TrashIcon />
-          </Button>
-          <Button
-            onclick={() => {
-              setAddTaskDialogIsOpen(true)
-            }}
-          >
-            {" "}
-            Nova tarefa <AddIcon />
-          </Button>
-          <AddTaskDialog
-            handleClose={() => setAddTaskDialogIsOpen(false)}
-            isOpen={addTaskDialogIsOpen}
-          />
-        </div>
-      </div>
+      <Header subtitle="Minhas Tarefas" title="Minhas Tarefas" />
       {/* Lista de tarefas */}
       <div className="rounded-xl bg-white p-6">
         {/* Manhã */}
