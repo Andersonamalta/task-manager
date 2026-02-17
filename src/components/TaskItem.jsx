@@ -63,7 +63,7 @@ const TaskIem = ({ task }) => {
     }
 
     if (task.status == "not_started") {
-      return "bg-[#35383E]/10 text-[#35383E]"
+      return "bg-[#35383E]/5 text-[#35383E]"
     }
   }
 
